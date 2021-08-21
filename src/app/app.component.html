@@ -1,0 +1,19 @@
+<ng-container *ngIf="authService.currentUserValue; else noUser">
+  <!-- Header -->
+  <ngx-header *ngIf="authService.currentUserValue"></ngx-header>
+  <!-- Router outlet -->
+  <div class="wrap-container">
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</ng-container>
+<ng-template #noUser>
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+  </div>
+</ng-template>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="pacman" [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>

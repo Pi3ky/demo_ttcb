@@ -1,0 +1,20 @@
+.text-breadcrumb{
+  color: #52ab98;
+  &:hover {
+    text-decoration: none;
+    color: #2b6777;
+  }
+}
+.breadcrumb-item+.breadcrumb-item::before {
+  content: "|";
+}
+.img-view-product{
+  max-width: 100px;
+  max-height: 100px;
+}
+.border-item{
+  border-bottom: 1px dashed #c4c4c4;
+}
+.fa-trash-alt{
+  color: #dd0c0c;
+}

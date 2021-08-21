@@ -1,0 +1,66 @@
+/* You can add global styles to this file, and also import other style files */
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+
+.modal-dialog {
+  height: calc(100vh - 80px);
+}
+.shadow {
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+}
+.nav-link{
+  font-weight: 600;
+  text-transform: uppercase;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  &.active {
+    color: #52ab98 !important;
+  }
+}
+.wrap-container {
+  background-color: #f2f2f2;
+}
+.custom-carousel{
+  .carousel{
+    .carousel-control{
+      display: none;
+    }
+  }
+}
+.bg-white{
+  background-color: #fff;
+}
+.btn-act {
+  width: 150px;
+}
+.btn-action-sm {
+  width: 28px;
+  height: 28px;
+  background-color: #fff;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+  padding: 0;
+  margin: 0 5px;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+.text-pun-success {
+  color: #52ab98;
+}
+
+.form-control.ng-touched.ng-invalid {
+  border-color: #dc3545;
+}
+.breadcrumb{
+  background-color: transparent;
+}
+.table th, .table td {
+  vertical-align: middle;
+}
+.form-qty{
+  width: 100px;
+}

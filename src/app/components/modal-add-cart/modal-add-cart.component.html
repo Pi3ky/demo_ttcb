@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h5 class="modal-title header">Selected product</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">
+      <i class="fas fa-times"></i>
+    </span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="d-flex align-items-center">
+    <img [src]="selectedProduct.image" [alt]="selectedProduct.title" class="img-product-sm mr-auto">
+    <div class="price-product mr-4">
+      <label class="mb-0">Price: </label>
+      <label class="ml-2"><b>{{selectedProduct.price | currency}}</b></label>
+    </div>
+    <div class="d-flex align-items-center mr-4">
+      <label>Quantity: </label>
+      <input type="number" [(ngModel)]="selectedProduct.qty" class="form-control ml-2 form-qty" min="1" (input)="calcTotalPrice()">
+    </div>
+    <div class="d-flex align-items-center field-total">
+      <label>sub-Total: </label>
+      <label class="ml-2"><b>{{selectedProduct.amount | currency}}</b></label>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-outline-success btn-act" (click)="confirmOrder()">Buy</button>
+  <button class="btn btn-outline-secondary btn-act" (click)="close()">Close</button>
+</div>
