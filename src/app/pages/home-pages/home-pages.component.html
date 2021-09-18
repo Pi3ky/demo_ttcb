@@ -34,6 +34,7 @@
         <div class="mt-4">
           <p class="desc-product">Name: <b>{{product.title}}</b></p>
           <p class="desc-product">Price: <b>{{product.price | currency}}</b></p>
+          <ngx-star-rating [(ngModel)]="product.rate" [id]="product.id" [disabled]="true" class="custom-rating"></ngx-star-rating>
         </div>
       </div>
     </div>

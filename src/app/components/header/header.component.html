@@ -10,19 +10,24 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/pages/home" routerLinkActive="active">Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/pages/news" routerLinkActive="active">News</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/pages/products" routerLinkActive="active">Product</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/pages/about-us" routerLinkActive="active">About us</a>
-      </li>
     </ul>
-    <a class="ml-auto link-cart" href="javascript:;" (click)="logout()">
-      <i class="fas fa-user"></i>
-    </a>
+    <div class="btn-group ml-auto" dropdown>
+      <a class="link-cart" dropdownToggle href="javascript:;" aria-controls="user">
+        <i class="fas fa-user"></i>
+      </a>
+      <ul id="user" *dropdownMenu class="dropdown-menu"
+          role="menu" aria-labelledby="button-basic">
+          <ng-container  *ngIf="authService.currentUserValue; else noUser">
+            <li role="menuitem"><a class="dropdown-item" routerLink="/pages/account" >Account settings</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="javascript:;" (click)="logout()">Logout</a></li>
+          </ng-container>
+          <ng-template #noUser>
+            <li role="menuitem"><a class="dropdown-item" routerLink="/login" >Login</a></li>
+          </ng-template>
+
+
+      </ul>
+    </div>
     <a routerLink="/pages/cart" routerLinkActive="active" class="ml-4 link-cart">
       <i class="fas fa-shopping-cart"></i>
     </a>

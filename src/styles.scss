@@ -37,6 +37,22 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 .btn-act {
   width: 150px;
 }
+.btn-pun-success{
+  background-color: #52ab98;
+  color: #fff;
+  &:hover {
+    color: #fff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+  }
+}
+.btn-pun-success-dark{
+  background-color: #73a24e;
+  color: #fff;
+  &:hover {
+    color: #fff;
+    background-color:  #a9c25d;
+  }
+}
 .btn-action-sm {
   width: 28px;
   height: 28px;
@@ -48,8 +64,21 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 button:disabled {
   cursor: not-allowed;
 }
+.link-breadcrumb{
+  color: #52ab98;
+  &:hover {
+    text-decoration: none;
+    color: #2b6777;
+  }
+}
+.breadcrumb-item+.breadcrumb-item::before {
+  content: "|";
+}
 .text-pun-success {
   color: #52ab98;
+}
+.text-pun-success-bold {
+  color: #2b6777;
 }
 
 .form-control.ng-touched.ng-invalid {
@@ -63,4 +92,35 @@ button:disabled {
 }
 .form-qty{
   width: 100px;
+}
+
+.ng-select {
+  .ng-select-container{
+    .ng-value-container{
+      .ng-input{
+        input {
+          padding: 0;
+        }
+      }
+    }
+    &:hover {
+      box-shadow: none;
+    }
+  }
+}
+
+.custom-rating{
+  .star {
+    font-size: 16px !important;
+    padding: 0 5px !important;
+    &:hover {
+      transform: none !important;
+    }
+  }
+  input.star-5{
+    &:checked ~ label.star::before{
+      color: #fd4 !important;
+      text-shadow: none !important;
+    }
+  }
 }

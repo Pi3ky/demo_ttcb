@@ -35,12 +35,13 @@
   .nav-item{
     .nav-link {
       color: #fff;
-      &.active {
+      &.active, &:hover {
         color: #2b6667 !important;
         background-color: #fff;
         border-radius: 5px;
       }
     }
+
   }
 }
 .img-product{

@@ -23,8 +23,11 @@
     "@ng-select/ng-select": "^3.1.0",
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
+    "json-server": "^0.16.3",
     "ngx-bootstrap": "^5.5.0",
     "ngx-spinner": "^8.1.0",
+    "ngx-star-rating": "^2.0.2",
+    "ngx-toastr": "^11.3.3",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"

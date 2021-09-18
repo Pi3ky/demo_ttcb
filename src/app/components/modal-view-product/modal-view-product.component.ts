@@ -15,7 +15,6 @@ export class ModalViewProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.product)
   }
 
   close() {

@@ -1,4 +1,4 @@
-export interface Customer {
+export interface User {
   id: number;
   name: string;
   email: string;
@@ -14,8 +14,12 @@ export interface Products {
   image: string;
   description: string;
   title: string;
+  rate: number;
+  colors: Colors[];
 }
 
 export interface Colors {
-  color: string
+  value: string;
+  name: string;
+  id: string;
 }

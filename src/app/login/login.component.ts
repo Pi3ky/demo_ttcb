@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AlertService } from '../_services/alert.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
+  loginForm: FormGroup;
   submitted: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private spinner: NgxSpinnerService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -37,18 +39,26 @@ export class LoginComponent implements OnInit {
       return;
     }
     const param = {
-      username: "mor_2314",
-      password: "83r5^_"
+      username: this.f.username.value,
+      password: this.f.password.value
     }
     this.spinner.show();
     this.authService.createSession(param).subscribe(
       res => {
         this.spinner.hide();
-        this.router.navigate([this.route.snapshot.queryParams['returnUrl'] || `pages/home`]);
+        if(res.length){
+          const currentUser = res[0];
+          localStorage.setItem(this.authService._USER_KEY, JSON.stringify(currentUser));
+          this.authService.currentUserSubject.next(currentUser);
+          this.router.navigate([this.route.snapshot.queryParams['returnUrl'] || `pages/home`]);
+        } else {
+          this.alertService.error('Username or Password is not correct')
+        }
+
       },
       err => {
-        console.error(err);
         this.spinner.hide();
+        console.error(err);
       }
     )
   }

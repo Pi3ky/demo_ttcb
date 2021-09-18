@@ -15,6 +15,9 @@
     <p>Price: <b class="text-danger">{{product.price | currency}}</b></p>
     <p>Tag: <a class="mb-0 text-primary" href="javascript:;" (click)="filterByTag()">#{{product.category}}</a></p>
     <p>Description: {{product.description}}</p>
+    <!-- <p>Colors:
+      <label class="circle-color" [class.border]="color.name === 'White'" [style.backgroundColor]="color.value" *ngFor="let color of product.colors"></label>
+    </p> -->
   </div>
 </div>
 

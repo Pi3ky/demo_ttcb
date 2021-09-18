@@ -1,7 +1,9 @@
 .login-form{
-  max-width: 600px;
-  margin: 200px auto;
+  width: 600px;
 }
 .wrap{
-  height: 100vh;
+  height: calc(100vh - 67px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

@@ -252,4 +252,5 @@ export const country = [
   { "id": "l3pKu8YaidtQ_Psa", "name": "Zimbabwe", "code": "ZW" }
 ];
 
-export const urlApi = 'https://fakestoreapi.com';
+export const urlApi = 'http://localhost:3000';
+

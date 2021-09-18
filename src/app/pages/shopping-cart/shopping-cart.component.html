@@ -1,160 +1,169 @@
 <div class="wrap-container p-4">
-    <!-- Breadcrumb -->
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="/pages/home" class="font-weight-bold text-breadcrumb">Home</a>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">Cart</li>
-      </ol>
-    </nav>
+  <!-- Breadcrumb -->
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="/pages/home" class="font-weight-bold link-breadcrumb">Home</a>
+      </li>
+      <li class="breadcrumb-item active pl-0" aria-current="page">Cart</li>
+    </ol>
+  </nav>
 
-    <div class="cart-content">
-      <div class="row">
-        <!-- Table product -->
-        <div class="col-12 col-lg-8 border-right">
-          <h2 class="text-pun-success px-5 my-4">Your cart</h2>
-          <div class="table-responsive">
-            <table class="table table-borderless">
-              <thead class="border-bottom">
-                <th>Products</th>
-                <th>Price</th>
-                <th class="text-center">Quantity</th>
-                <th>Sub-Total</th>
-                <th class="text-right">Actions</th>
-              </thead>
-              <tbody>
-                <ng-container *ngIf="listProducts && listProducts.length; else noData">
-                  <tr *ngFor="let product of listProducts" class="border-item">
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <img [src]="product.image" alt="picture" class="img-view-product mr-4">
-                        <label class="mb-0">{{product.title}}</label>
-                      </div>
-                    </td>
-                    <td>{{product.price | currency}}</td>
-                    <td class="text-center">
-                      <ng-container *ngIf="enableEdit; else notEdit">
-                        <input type="number" class="form-control mx-auto form-qty" [(ngModel)]="product.qty" [min]="1"
-                          (input)="updateProduct(product.id)">
-                      </ng-container>
-                      <ng-template #notEdit>
-                        {{product.qty}}
-                      </ng-template>
-                    </td>
-                    <td>{{product.amount | currency}}</td>
-                    <td>
-                      <div class="d-flex align-items-center justify-content-end">
-                        <button class="btn btn-action-sm" [disabled]="enableEdit" (click)="removeProduct(product)">
-                          <i class="fas fa-trash-alt"></i>
-                        </button>
-                        <button class="btn btn-action-sm" [disabled]="enableEdit" (click)="enableEdit = true">
-                          <i class="fas fa-pen text-pun-success"></i>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                </ng-container>
-                <ng-template #noData>
-                  <tr>
-                    <td colspan="5" class="px-0">
-                      <app-no-data></app-no-data>
-                    </td>
-                  </tr>
-                </ng-template>
-              </tbody>
-              <tfoot *ngIf="enableEdit">
-                <tr>
-                  <td colspan="5">
-                    <button class="btn btn-outline-secondary float-right mx-2" (click)="enableEdit = false">
-                      <i class="fas fa-times"></i> Cancel
-                    </button>
-                    <button class="btn btn-outline-success float-right mx-2" (click)="onSaveEdit()">
-                      <i class="fas fa-check"></i> Save
-                    </button>
+  <div class="cart-content">
+    <div class="row">
+      <!-- Table product -->
+      <div class="col-12 col-lg-8 border-right">
+        <h2 class="text-pun-success px-5 my-4 border-bottom">Your cart</h2>
+        <div class="table-responsive">
+          <table class="table table-borderless">
+            <thead class="border-bottom">
+              <th>Products</th>
+              <th>Price</th>
+              <th class="text-center">Quantity</th>
+              <th>Sub-Total</th>
+              <th class="text-right">Actions</th>
+            </thead>
+            <tbody>
+              <ng-container *ngIf="requestParams.bag && requestParams.bag.length; else noData">
+                <tr *ngFor="let product of requestParams.bag" class="border-item">
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img [src]="product.image" alt="picture" class="img-view-product mr-4">
+                      <label class="mb-0">{{product.title}}</label>
+                    </div>
+                  </td>
+                  <td>{{product.price | currency}}</td>
+                  <td class="text-center">
+                    <ng-container *ngIf="enableEdit; else notEdit">
+                      <input type="number" class="form-control mx-auto form-qty" [(ngModel)]="product.qty" [min]="1"
+                        (input)="updateProduct(product.id)">
+                    </ng-container>
+                    <ng-template #notEdit>
+                      {{product.qty}}
+                    </ng-template>
+                  </td>
+                  <td>{{product.amount | currency}}</td>
+                  <td>
+                    <div class="d-flex align-items-center justify-content-end">
+                      <button class="btn btn-action-sm" [disabled]="enableEdit" (click)="removeProduct(product)"
+                              popover="Remove" triggers="hover">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                      <button class="btn btn-action-sm" [disabled]="enableEdit" (click)="enableEdit = true"
+                              popover="Edit" triggers="hover">
+                        <i class="fas fa-pen text-pun-success"></i>
+                      </button>
+                    </div>
                   </td>
                 </tr>
-              </tfoot>
-            </table>
+              </ng-container>
+              <ng-template #noData>
+                <tr>
+                  <td colspan="5" class="px-0">
+                    <app-no-data></app-no-data>
+                  </td>
+                </tr>
+              </ng-template>
+            </tbody>
+            <tfoot *ngIf="enableEdit">
+              <tr>
+                <td colspan="5">
+                  <button class="btn btn-outline-secondary float-right mx-2" (click)="enableEdit = false">
+                    <i class="fas fa-times"></i> Cancel
+                  </button>
+                  <button class="btn btn-outline-success float-right mx-2" (click)="onSaveEdit()">
+                    <i class="fas fa-check"></i> Save
+                  </button>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6"></div>
+          <div class="d-none d-md-block col-md-2"></div>
+          <div class="col-12 col-md-4">
+            <div class="float-right info-cart">
+              <p>Total quantity: <b>{{totalObj.total_qty}}</b></p>
+              <p>Total price: <b>{{totalObj.sub_total | currency}}</b></p>
+            </div>
+            <button class="btn btn-pun-success-dark w-100" routerLink="/pages/home">Continue shopping</button>
           </div>
         </div>
+      </div>
 
-        <!-- Shipping info -->
-        <div class="col-12 col-lg-4">
-          <h2 class="text-pun-success px-5 my-4">Your information</h2>
-          <form [formGroup]="infoUser">
-            <div class="form-group">
-              <label>Name: </label>
-              <input type="text" class="form-control" formControlName="name" required
-                [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
-            </div>
-            <!-- Phone / Email -->
-            <div class="row">
-              <div class="col-12 col-lg-6">
-                <div class="form-group">
-                  <label>Phone: </label>
-                  <input type="password" class="form-control" formControlName="phoneNumber" required
-                    [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }">
-                </div>
-              </div>
-              <div class="col-12 col-lg-6">
-                <div class="form-group">
-                  <label>Emails: </label>
-                  <input type="password" class="form-control" formControlName="email"
-                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }" pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
-                </div>
+      <!-- Shipping info -->
+      <div class="col-12 col-lg-4">
+        <h2 class="text-pun-success px-5 my-4 border-bottom">Your information</h2>
+        <form [formGroup]="infoUser" (submit)="onSubmit(infoUser)">
+          <div class="form-group">
+            <label>Name: </label>
+            <input type="text" class="form-control" [(ngModel)]="requestParams.customer.name" formControlName="name" required
+              [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+          </div>
+          <!-- Phone / Email -->
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <label>Phone: </label>
+                <input type="text" class="form-control" [(ngModel)]="requestParams.customer.phone" formControlName="phone" required
+                  [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
               </div>
             </div>
-            <!-- Country / City -->
-            <div class="row">
-              <div class="col-12 col-lg-6">
-                <div class="form-group">
-                  <label>Country: </label>
-                  <!-- <ng-select  [(ngModel)]="defaultCountry" formControlName="country"
-                              [clearable]="false" [items]="countries" class="form-control"
-                              [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
-                </ng-select> -->
-                <ng-select [(ngModel)]="defaultCountry" formControlName="country"
-                            [clearable]="false" [items]="countries" class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <label>Emails: </label>
+                <input type="text" class="form-control" formControlName="email" [(ngModel)]="requestParams.customer.email"
+                  [ngClass]="{ 'is-invalid': submitted && f.email.errors }" pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
+              </div>
+            </div>
+          </div>
+          <!-- Country / City -->
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <label>Country: </label>
+                <ng-select [(ngModel)]="requestParams.customer.country" formControlName="country" bindValue="code" bindLabel="name"
+                  [clearable]="false" [items]="countries" [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
                 </ng-select>
-                </div>
-              </div>
-              <div class="col-12 col-lg-6">
-                <div class="form-group">
-                  <label>City: </label>
-                  <input type="password" class="form-control" formControlName="city"
-                    [ngClass]="{ 'is-invalid': submitted && f.city.errors }" required>
-                </div>
               </div>
             </div>
-            <!-- State / Zipcode -->
-            <div class="row">
-              <div class="col-12 col-lg-6">
-                <div class="form-group">
-                  <label>State: </label>
-                  <input type="password" class="form-control" formControlName="state"
-                    [ngClass]="{ 'is-invalid': submitted && f.state.errors }" required>
-                </div>
-              </div>
-              <div class="col-12 col-lg-6">
-                <div class="form-group">
-                  <label>Postal code: </label>
-                  <input type="password" class="form-control" formControlName="zipcode">
-                </div>
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <label>City: </label>
+                <input type="text" class="form-control" formControlName="city" [(ngModel)]="requestParams.customer.city"
+                  [ngClass]="{ 'is-invalid': submitted && f.city.errors }" required>
               </div>
             </div>
-            <div class="form-group">
-              <label>Street: </label>
-              <input type="password" class="form-control" formControlName="street"
-                [ngClass]="{ 'is-invalid': submitted && f.street.errors }" required>
+          </div>
+          <!-- State / Zipcode -->
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <label>State: </label>
+                <input type="text" class="form-control" formControlName="state" [(ngModel)]="requestParams.customer.state"
+                  [ngClass]="{ 'is-invalid': submitted && f.state.errors }" required>
+              </div>
             </div>
-            <div class="form-group">
-              <label>Note: </label>
-              <textarea type="password" class="form-control" formControlName="note"></textarea>
+            <div class="col-12 col-lg-6">
+              <div class="form-group">
+                <label>Postal code: </label>
+                <input type="text" class="form-control" formControlName="zipcode" [(ngModel)]="requestParams.customer.zipcode">
+              </div>
             </div>
-          </form>
-        </div>
+          </div>
+          <div class="form-group">
+            <label>Street: </label>
+            <input type="text" class="form-control" formControlName="street" [(ngModel)]="requestParams.customer.street"
+              [ngClass]="{ 'is-invalid': submitted && f.street.errors }" required>
+          </div>
+          <div class="form-group">
+            <label>Note: </label>
+            <textarea type="text" class="form-control" formControlName="note" [(ngModel)]="requestParams.customer.note"></textarea>
+          </div>
+          <button class="btn btn-pun-success btn-lg float-right" type="submit">Continue to pay</button>
+        </form>
       </div>
     </div>
   </div>
+</div>

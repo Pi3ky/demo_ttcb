@@ -1,0 +1,79 @@
+<div class="container wrap-update">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="/pages/home" class="font-weight-bold link-breadcrumb">Home</a>
+      </li>
+      <li class="breadcrumb-item active pl-0" aria-current="page">Account settings</li>
+    </ol>
+  </nav>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <h4 class="text-center text-pun-success-bold border-bottom">Update login info</h4>
+        <div class="form-group">
+          <label>Username: </label>
+          <input type="text" class="form-control" formControlName="username" readonly [(ngModel)]="currentUser.username">
+        </div>
+        <div class="form-group">
+          <label>Password: </label>
+          <input type="password" class="form-control" formControlName="password" [(ngModel)]="currentUser.password" required
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+        </div>
+        <!-- <div class="form-group">
+          <label>Confirm password: </label>
+          <input type="password" class="form-control" formControlName="cf_password" [(ngModel)]="cfpassword" required
+            [ngClass]="{ 'is-invalid': userForm.controls.cf_password.touched && cfpassword !== f.password.errors }">
+        </div> -->
+      </div>
+      <div class="col-12 col-md-6">
+        <h4 class="text-center text-pun-success-bold border-bottom">Update user info</h4>
+        <div class="form-group">
+          <label>Name: </label>
+          <input type="text" class="form-control" formControlName="name" [(ngModel)]="currentUser.user.name" required
+            [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+        </div>
+        <div class="form-group">
+          <label>Phone: </label>
+          <input type="text" class="form-control" formControlName="phone" [(ngModel)]="currentUser.user.phone" required
+            [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <label>Country: </label>
+              <ng-select [(ngModel)]="currentUser.user.country" formControlName="country" bindValue="code" bindLabel="name"
+                [clearable]="false" [items]="countries">
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <label>City: </label>
+              <input type="text" class="form-control" formControlName="city" [(ngModel)]="currentUser.user.city">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <label>State: </label>
+              <input type="text" class="form-control" formControlName="state" [(ngModel)]="currentUser.user.state">
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <label>Postal code: </label>
+              <input type="text" class="form-control" formControlName="zipcode" [(ngModel)]="currentUser.user.zipcode">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Street: </label>
+          <input type="text" class="form-control" formControlName="street" [(ngModel)]="currentUser.user.street">
+        </div>
+        <button class="btn btn-success btn-lg mt-5">SAVE INFOMATION</button>
+      </div>
+    </div>
+  </form>
+</div>

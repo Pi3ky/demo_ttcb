@@ -5,6 +5,7 @@ import { PagesService } from '../pages.service';
 import { BsModalService } from "ngx-bootstrap/modal";
 import { ModalViewProductComponent } from 'src/app/components/modal-view-product/modal-view-product.component';
 import { ModalAddCartComponent } from 'src/app/components/modal-add-cart/modal-add-cart.component';
+import { AlertService } from 'src/app/_services/alert.service';
 
 const ALL_PRODUCT = 'All product';
 
@@ -22,7 +23,6 @@ export class HomePagesComponent implements OnInit {
   products: Products[] = [];
   categories: string[] = [];
   selectedTag: string = '';
-
   constructor(
     private pageService: PagesService,
     private spinner: NgxSpinnerService,
@@ -43,11 +43,11 @@ export class HomePagesComponent implements OnInit {
     this.pageService.getProducts().subscribe(
       res => {
         this.products = res;
-        // console.log(res)
         this.spinner.hide();
       },
       err => {
         console.error(err)
+
         this.spinner.hide();
       }
     )
@@ -79,7 +79,7 @@ export class HomePagesComponent implements OnInit {
         product: product,
       }
     })
-    _bsModalRef.content!.result.subscribe(
+    _bsModalRef.content.result.subscribe(
       result => {
         if(result){
           if (result.buy) {
@@ -101,7 +101,10 @@ export class HomePagesComponent implements OnInit {
     if(tag){
       this.selectedTag = tag;
       this.spinner.show();
-      this.pageService.filterCategory(tag).subscribe(
+      const param = {
+        category: tag
+      }
+      this.pageService.filterCategory(param).subscribe(
         res => {
           this.products = res;
           this.spinner.hide();

@@ -10,16 +10,23 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { LoginComponent } from './login/login.component';
 import { PublicModule } from './components/public.modules';
 import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
+import { AlertComponent } from './components';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    AlertComponent,
     LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      maxOpened: 1,
+      autoDismiss: true
+    }),
     PublicModule,
     CommonModule,
     NgxSpinnerModule,
